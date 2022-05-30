@@ -1,3 +1,4 @@
 Hola
-Soy Gina
+Soy Gina, tengo 23 años y estoy aprendiendo a usar la consola de comandos
+y recordando como funciona git
 fin
