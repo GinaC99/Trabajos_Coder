@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoderHouse</title>
+
+</head>
+
+<body>
+    <button onclick={showAllProducts()} type="button">
+        Ver todos los productos
+    </button>
+    <form> Buscar un producto
+        <label for="input_id">
+            <input type="number" id="value__Id-Search">
+        </label>
+        <button type="button" onclick={showinputId()}>
+            Buscar un producto
+        </button>
+    </form>
+    <form> Crear un Producto
+        <label for="input_id"> Ingrese el Titulo
+            <input type="text" id="value__tittle">
+        </label>
+        <label for="input_id"> Ingrese la URL
+            <input type="text" id="value__url">
+        </label>
+        <label for="input_id"> Ingrese el precio
+            <input type="number" id="value__price">
+        </label>
+        <button type="button" onclick={createProducts()}>
+            Crear un producto
+        </button>
+    </form>
+    <form> Actualiza un producto
+        <label for="input_id">
+            <input type="number" id="value__Id-Update">
+        </label>
+        <label for="input_id">
+            <input type="text" id="value__tittle-Update">
+        </label>
+        <label for="input_id">
+            <input type="text" id="value__url-Update">
+        </label>
+        <label for="input_id">
+            <input type="number" id="value__price-Update">
+        </label>
+        <button type="button" onclick={updateProduct()}>
+            Actualizar un Producto
+        </button>
+    </form>
+    <form> Eliminar un producto
+        <label for="input_id">
+            <input type="number" id="value__Id-Delete">
+        </label>
+        <button type="button" onclick={deletId()}>
+            Eliminar
+        </button>
+    </form>
+    <script src="../Views/actions.js"></script>
+</body>
+
+</html>

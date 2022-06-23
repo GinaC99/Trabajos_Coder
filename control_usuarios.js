@@ -14,7 +14,12 @@ class Contenedor {
             } catch (e) {
                 const archivo = await fs.promises.writeFile(this.ruta, '')
             }
-            Objeto.id = Date.now() + Math.round(Math.random() * 100)
+            const getAllData = await this.getAll()
+            try {
+                Objeto.id = parseInt(getAllData[getAllData.length - 1].id) + 1
+            } catch {
+                Objeto.id = 1
+            }
             producto.push(Objeto)
             await fs.promises.writeFile(this.ruta, JSON.stringify(producto))
             return (Objeto.id)
@@ -26,7 +31,7 @@ class Contenedor {
         try {
             const contenido = await fs.promises.readFile(this.ruta, 'utf-8')
             const arrayObjetos = JSON.parse(contenido)
-            return (arrayObjetos.filter((res) => res.id === id)).length > 0 ? (arrayObjetos.filter((res) => res.id === id)) : null;
+            return(arrayObjetos.filter((res) => res.id === id)).length > 0 ? (arrayObjetos.filter((res) => res.id === id)) : null;
         } catch (e) {
             return ('Opss, alg salio mal, intentelo de nuevo mas tarde', e)
         }
@@ -68,13 +73,37 @@ class Contenedor {
             return ('Opss', e)
         }
     }
+    async updateById(id, dataChange) {
+        try {
+            const idDef = parseInt(id)
+            const idUpdate = await this.getById(idDef)
+            const dataGen = await this.getAll();
+            const AllDataUpdate = [];
+            const DataSend = dataChange;
+            DataSend.id = id;
+            dataGen.filter((response) => {
+                if (response.id === idUpdate[0].id) {
+                    AllDataUpdate.push(DataSend)
+                } else {
+                    AllDataUpdate.push(response)
+                }
+            })
+            fs.writeFileSync(this.ruta, JSON.stringify(AllDataUpdate))
+
+        } catch (e) {
+            console.log(e);
+        }
+
+    }
 };
 const Gina = new Contenedor('gina')
-const obj2 = {
-
-    title: "Ejemplo 1",
-    price: "123456",
-    thumbnail: "https://www.cocinacaserayfacil.net/wp-content/uploads/2020/03/Platos-de-comida-que-pides-a-domicilio-y-puedes-hacer-en-casa-945x630.jpg"
+const Objeto= {
+    tittle: 'Prueba 4',
+    price: 500,
+    thumbnail: 'https://www.recetasgratis.net/receta-de-torta-invertida-de-manzanas-56337.html',
 }
-
+const prueba = async () => {
+    // await Gina.updateById(2)
+    await Gina.save(Objeto)
+};
 module.exports = Contenedor;
